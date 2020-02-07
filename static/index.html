@@ -24,18 +24,12 @@
 
           useEffect(() => {
             axios.get('/api/dogs')
-            .then(response => {
-              setPets(response.data)
-            })
+            .then(response => setPets(response.data))
           },[])
 
-          const postPets = () => {
-            console.log('Im here')
-            const pet = {};
-            pet.name = petName;
-            console.log(pet)
-            axios.post('/api/dogs', pet)
-            .then(setPets([...pets,petName]));
+          const postPets = async () => {
+            const response = await axios.post('/api/dogs', {petName})
+            setPets([...pets,petName]);
           }
 
           return (
